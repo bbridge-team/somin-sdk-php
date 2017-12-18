@@ -2,6 +2,8 @@
 
 SoMin API SDK for Somin API is a PHP library for making calls to [Somin API](http://dev.somin.ai). The library enables users for making API calls from PHP 5.6 or high.
 
+[![Build Status](https://travis-ci.org/bbridge-team/somin-sdk-php.svg?branch=master)](https://travis-ci.org/bbridge-team/somin-sdk-php)
+
 ## Example
 
 ```php
