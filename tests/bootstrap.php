@@ -4,8 +4,6 @@ use SoMin\API\Authorization\CredentialsAuthorizer;
 use SoMin\API\Authorization\Requests\UserCredential;
 use SoMin\Common\SimpleHttpRequester;
 
-require __DIR__ . '/../vendor/autoload.php';
-
 define('USERNAME', getenv('TEST_USERNAME'));
 define('PASSWORD', getenv('TEST_PASSWORD'));
 $token = getenv('TEST_TOKEN');
