@@ -33,7 +33,6 @@ class IndividualUserProfilingTest extends AbstractTest
             ->withRelationship();
 
         $requestResponse = $userProfiler->predictIndividualUserProfile($request);
-        $this->assertNotNull($requestResponse);
         $this->assertRequestIDResponse($requestResponse);
 
         /** @var IndividualUserProfile $response */

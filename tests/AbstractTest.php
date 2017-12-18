@@ -11,7 +11,7 @@ use SoMin\Common\SimpleHttpRequester;
 abstract class AbstractTest extends \PHPUnit_Framework_TestCase
 {
     const RESPONSE_WAIT_TIME_SECONDS = 1;
-    const RESPONSE_WAIT_NUM_ATTEMPTS = 10;
+    const RESPONSE_WAIT_NUM_ATTEMPTS = 15;
 
     /** @var SimpleHttpRequester */
     protected $requester;
@@ -28,6 +28,7 @@ abstract class AbstractTest extends \PHPUnit_Framework_TestCase
 
     protected function assertRequestIDResponse($response)
     {
+        $this->assertNotNull($response);
         /** @var $response RequestIDResponse */
         $this->assertInstanceOf(RequestIDResponse::class, $response);
         $this->assertEquals(202, $response->getHttpCode());

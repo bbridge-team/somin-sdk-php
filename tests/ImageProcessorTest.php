@@ -23,7 +23,6 @@ class ImageProcessorTest extends AbstractTest
             ->setImageURL('https://github.com/bbridge-team/somin-sdk-php/raw/master/tests/cats.jpg');
 
         $requestResponse = $imageProcessor->detectImageObjects($request);
-        $this->assertNotNull($requestResponse);
         $this->assertRequestIDResponse($requestResponse);
 
         /** @var ImageObjects $response */
@@ -50,7 +49,6 @@ class ImageProcessorTest extends AbstractTest
             ->setTopNumToReturn(5);
 
         $requestResponse = $imageProcessor->detectImageConcepts($request);
-        $this->assertNotNull($requestResponse);
         $this->assertRequestIDResponse($requestResponse);
 
         /** @var ImageConcepts $response */
