@@ -64,3 +64,6 @@ var_dump($response);
 - Install [PHP Unit](https://phpunit.de/)
 - Set environment variables **TEST_USERNAME** and **TEST_PASSWORD** to SoMin API user name and password, respectively.
 - run **phpunit** in main directory
+
+## API Documentation
+More information can be found on the [SoMin developer web site](http://dev.somin.ai).
