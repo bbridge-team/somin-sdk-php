@@ -3,9 +3,11 @@
 
 namespace SoMin\API\ImageProcessing\Responses;
 
-
 use SoMin\Common\AbstractResponse;
 
+/**
+ * Structure to be returned as a result of Image Concept Detection API method.
+ */
 class ImageConcepts extends AbstractResponse
 {
     private $error;
@@ -26,7 +28,7 @@ class ImageConcepts extends AbstractResponse
     }
 
     /**
-     * Error messahe if request went wrong. Null if request is successful.
+     * Error message if request went wrong. Null if request is successful.
      *
      * @return string|null
      */

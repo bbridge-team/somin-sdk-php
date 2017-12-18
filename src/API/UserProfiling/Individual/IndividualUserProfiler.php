@@ -7,6 +7,9 @@ use SoMin\API\UserProfiling\Individual\Requests\UserProfileData;
 use SoMin\Common\APIRequester;
 use SoMin\Common\RequestIDResponse;
 
+/**
+ * Individual User Profiling API capabilities.
+ */
 class IndividualUserProfiler extends APIRequester
 {
     /**

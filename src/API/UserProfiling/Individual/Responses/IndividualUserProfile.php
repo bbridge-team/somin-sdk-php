@@ -3,9 +3,11 @@
 
 namespace SoMin\API\UserProfiling\Individual\Responses;
 
-
 use SoMin\Common\AbstractResponse;
 
+/**
+ * Structure to be returned as a result of individual User Profiling API method.
+ */
 class IndividualUserProfile extends AbstractResponse
 {
     /** @var string */
@@ -60,6 +62,8 @@ class IndividualUserProfile extends AbstractResponse
     }
 
     /**
+     * Detected gender.
+     *
      * @return string
      */
     public function getGender()
@@ -68,6 +72,8 @@ class IndividualUserProfile extends AbstractResponse
     }
 
     /**
+     * Detected age group.
+     *
      * @return string
      */
     public function getAgeGroup()
@@ -76,6 +82,8 @@ class IndividualUserProfile extends AbstractResponse
     }
 
     /**
+     * Detected Education Level.
+     *
      * @return string
      */
     public function getEducationLevel()
@@ -84,6 +92,8 @@ class IndividualUserProfile extends AbstractResponse
     }
 
     /**
+     * Detected Relationship Status.
+     *
      * @return string
      */
     public function getRelationshipStatus()
@@ -92,6 +102,8 @@ class IndividualUserProfile extends AbstractResponse
     }
 
     /**
+     * Detected Income Level.
+     *
      * @return string
      */
     public function getIncomeLevel()
@@ -100,6 +112,8 @@ class IndividualUserProfile extends AbstractResponse
     }
 
     /**
+     * Detected Occupation Industry.
+     *
      * @return string
      */
     public function getOccupationIndustry()

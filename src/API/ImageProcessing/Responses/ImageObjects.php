@@ -5,8 +5,12 @@ namespace SoMin\API\ImageProcessing\Responses;
 
 use SoMin\Common\AbstractResponse;
 
+/**
+ * Structure to be returned as a result of Image Object Detection API method.
+ */
 class ImageObjects extends AbstractResponse
 {
+    private $error;
     private $objects = [];
 
     /**
@@ -14,12 +18,28 @@ class ImageObjects extends AbstractResponse
      */
     public function setData($data)
     {
+        if (!empty($data['error'])) {
+            $this->error = $data['error'];
+        }
+
         if ($this->getHttpCode() == 200) {
             $this->objects = $data['objects'];
         }
     }
 
     /**
+     * Error message if request went wrong. Null if request is successful.
+     *
+     * @return string|null
+     */
+    public function getError()
+    {
+        return $this->error;
+    }
+
+    /**
+     * Detected objects from an image.
+     *
      * @return array
      */
     public function getObjects()

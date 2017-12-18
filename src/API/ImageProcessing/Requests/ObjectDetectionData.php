@@ -3,9 +3,11 @@
 
 namespace SoMin\API\ImageProcessing\Requests;
 
-
 use SoMin\Common\AbstractRequest;
 
+/**
+ * Input structure for Image Object Detection.
+ */
 class ObjectDetectionData extends AbstractRequest
 {
     /**
