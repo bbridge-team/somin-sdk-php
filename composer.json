@@ -23,7 +23,8 @@
   },
   "autoload": {
     "psr-4": {
-      "SoMin\\": "src"
+      "SoMin\\": "src",
+      "SoMin\\Test\\": "tests"
     }
   }
 }
