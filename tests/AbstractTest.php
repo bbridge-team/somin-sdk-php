@@ -11,7 +11,7 @@ use SoMin\Common\SimpleHttpRequester;
 abstract class AbstractTest extends \PHPUnit_Framework_TestCase
 {
     const RESPONSE_WAIT_TIME_SECONDS = 1;
-    const RESPONSE_WAIT_NUM_ATTEMPTS = 15;
+    const RESPONSE_WAIT_NUM_ATTEMPTS = 30;
 
     /** @var SimpleHttpRequester */
     protected $requester;
