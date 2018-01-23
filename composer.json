@@ -4,7 +4,7 @@
   "keywords": ["somin", "social", "multimedia analytics", "api", "sdk"],
   "type": "library",
   "homepage": "https://github.com/bbridge-team/somin-sdk-php",
-  "license": "Apache License 2.0",
+  "license": "Apache-2.0",
   "authors": [
     {
       "name": "Lepikhin Kirill",
