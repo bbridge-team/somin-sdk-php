@@ -51,6 +51,6 @@ abstract class AbstractTest extends \PHPUnit_Framework_TestCase
             $response = $commonProcessor->response($request);
         }
 
-        return $response;
+         return $response;
     }
 }

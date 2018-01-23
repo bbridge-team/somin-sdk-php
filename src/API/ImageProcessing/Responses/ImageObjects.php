@@ -18,13 +18,11 @@ class ImageObjects extends AbstractResponse
      */
     public function setData($data)
     {
-        if (!empty($data['error'])) {
-            $this->error = $data['error'];
+        if ($this->getHttpCode() != 200) {
+            return;
         }
 
-        if ($this->getHttpCode() == 200) {
-            $this->objects = $data['objects'];
-        }
+        $this->objects = $data['objects'];
     }
 
     /**

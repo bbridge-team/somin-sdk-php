@@ -18,7 +18,7 @@ class RequestIDResponse extends AbstractResponse
     public function setData($data)
     {
         if (!empty($data['error'])) {
-            $this->error = $data['error'];
+            $this->error = $data;
         }
 
         if ($this->getHttpCode() == 202) {
