@@ -15,6 +15,8 @@ class ImageProcessorTest extends AbstractTest
 {
     public function testCanRequestObjectDetectionAndReceiveResults()
     {
+        $this->markTestSkipped('API method currently doesn\'t work.');
+
         $this->authorize();
 
         $imageProcessor = new ImageProcessor($this->requester);
