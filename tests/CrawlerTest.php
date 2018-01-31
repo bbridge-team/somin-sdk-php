@@ -30,6 +30,7 @@ class CrawlerTest extends AbstractTest
         $this->assertInstanceOf(CrawlerDataId::class, $response);
         $this->assertEquals(200, $response->getHttpCode());
         $this->assertNotEmpty($response->getDataId());
+        $this->assertNotEmpty($response->getCrawledAt());
 
         $downloadRequest = (new CrawlerDownloadData())
             ->setDataId($response->getDataId());
