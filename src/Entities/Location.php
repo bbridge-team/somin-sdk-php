@@ -32,8 +32,8 @@ class Location
         $this->lat = Utils::get($data, 'lat');
         $this->lng = Utils::get($data, 'lng');
         $this->timeZoneOffset = Utils::get($data, 'timeZoneOffset');
-        $this->categoryId = Utils::get($data, 'categoryId');
-        $this->categoryName = Utils::get($data, 'categoryName');
+        $this->categoryId = Utils::get($data, 'venueCategoryId');
+        $this->categoryName = Utils::get($data, 'venueCategoryName');
     }
 
     /**

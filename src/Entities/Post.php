@@ -56,7 +56,7 @@ class Post
         $this->reposts = Utils::get($data, 'reposts');
 
         if (isset($data['properties'])) {
-            $this->parseProperties($data);
+            $this->parseProperties($data['properties']);
         }
     }
 
@@ -72,7 +72,7 @@ class Post
             unset($data['profile']);
         }
 
-        $this->properties = $data['properties'];
+        $this->properties = $data;
     }
 
     /**
