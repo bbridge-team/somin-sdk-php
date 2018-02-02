@@ -2,6 +2,8 @@
 
 namespace SoMin\Entities;
 
+use SoMin\Utils;
+
 class Account
 {
     /** @var string */
@@ -15,12 +17,8 @@ class Account
      */
     public function __construct(array $data)
     {
-        if (isset($data['id'])) {
-            $this->id = $data['id'];
-        }
-        if (isset($data['username'])) {
-            $this->username = $data['username'];
-        }
+        $this->id = Utils::get($data, 'id');
+        $this->username = Utils::get($data, 'username');
     }
 
 

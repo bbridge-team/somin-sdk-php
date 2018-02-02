@@ -2,6 +2,8 @@
 
 namespace SoMin\Entities;
 
+use SoMin\Utils;
+
 class Post
 {
     /** @var string */
@@ -26,6 +28,11 @@ class Post
     /** @var int */
     private $reposts;
 
+    /** @var Location */
+    private $location;
+    /** @var  */
+    private $profile;
+
     /** @var array */
     private $properties;
 
@@ -35,40 +42,37 @@ class Post
      */
     public function __construct(array $data)
     {
-        if (isset($data['source'])) {
-            $this->source = $data['source'];
-        }
-        if (isset($data['id'])) {
-            $this->id = $data['id'];
-        }
+        $this->source = Utils::get($data, 'source');
+        $this->id = Utils::get($data, 'id');
 
-        if (isset($data['userId'])) {
-            $this->userId = $data['userId'];
-        }
-        if (isset($data['screenName'])) {
-            $this->screenName = $data['screenName'];
-        }
+        $this->userId = Utils::get($data, 'userId');
+        $this->screenName = Utils::get($data, 'screenName');
 
-        if (isset($data['text'])) {
-            $this->text = $data['text'];
-        }
-        if (isset($data['imageUrl'])) {
-            $this->imageUrl = $data['imageUrl'];
-        }
-        if (isset($data['createdAt'])) {
-            $this->createdAt = (int) $data['createdAt'];
-        }
+        $this->text = Utils::get($data, 'text');
+        $this->imageUrl = Utils::get($data, 'imageUrl');
+        $this->createdAt = Utils::get($data, 'createdAt');
 
-        if (isset($data['likes'])) {
-            $this->likes = (int) $data['likes'];
-        }
-        if (isset($data['reposts'])) {
-            $this->reposts = (int) $data['reposts'];
-        }
+        $this->likes = Utils::get($data, 'likes');
+        $this->reposts = Utils::get($data, 'reposts');
 
         if (isset($data['properties'])) {
-            $this->properties = $data['properties'];
+            $this->parseProperties($data);
         }
+    }
+
+    private function parseProperties($data)
+    {
+        if (isset($data['location'])) {
+            $this->location = new Location($data['location']);
+            unset($data['location']);
+        }
+
+        if (isset($data['profile'])) {
+            $this->profile = new Profile($data['profile']);
+            unset($data['profile']);
+        }
+
+        $this->properties = $data['properties'];
     }
 
     /**
@@ -141,6 +145,22 @@ class Post
     public function getReposts()
     {
         return $this->reposts;
+    }
+
+    /**
+     * @return Location
+     */
+    public function getLocation()
+    {
+        return $this->location;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getProfile()
+    {
+        return $this->profile;
     }
 
     /**
