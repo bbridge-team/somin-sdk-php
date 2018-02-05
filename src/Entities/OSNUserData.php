@@ -12,8 +12,6 @@ class OSNUserData
     private $accounts;
     /** @var Post[] */
     private $posts;
-    /** @var array */
-    private $attributes;
 
     /**
      * OSNUserData constructor.
