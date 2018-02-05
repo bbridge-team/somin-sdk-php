@@ -18,10 +18,8 @@ class CrawlerTest extends AbstractTest
         $crawlerProcessor = new CrawlerProcessor($this->requester);
         $retrieveRequest = (new CrawlerRetrievalData())
             ->setDataSource(DataSourceEnum::TWITTERMULTISOURCE)
-//            ->setNumToRetrieve(10)
-//            ->setUserId('realdonaldtrump');
-            ->setNumToRetrieve(100)
-            ->setUserId('farseevs');
+            ->setNumToRetrieve(10)
+            ->setUserId('realdonaldtrump');
 
         $dataIdResponse = $crawlerProcessor->retrieval($retrieveRequest);
         $this->assertRequestIDResponse($dataIdResponse);
