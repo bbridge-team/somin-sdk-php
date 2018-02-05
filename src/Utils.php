@@ -12,4 +12,11 @@ class Utils
 
         return $data[$key];
     }
+
+    public static function getWithUnset(array &$data, $key, $defaultValue = null)
+    {
+        $value = self::get($data, $key, $defaultValue);
+        unset($data[$key]);
+        return $value;
+    }
 }

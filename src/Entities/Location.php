@@ -14,8 +14,6 @@ class Location
     private $lat;
     /** @var float */
     private $lng;
-    /** @var float */
-    private $timeZoneOffset;
     /** @var string */
     private $categoryId;
     /** @var string */
@@ -31,7 +29,6 @@ class Location
         $this->name = Utils::get($data, 'name');
         $this->lat = Utils::get($data, 'lat');
         $this->lng = Utils::get($data, 'lng');
-        $this->timeZoneOffset = Utils::get($data, 'timeZoneOffset');
         $this->categoryId = Utils::get($data, 'venueCategoryId');
         $this->categoryName = Utils::get($data, 'venueCategoryName');
     }
@@ -69,14 +66,6 @@ class Location
     }
 
     /**
-     * @return float
-     */
-    public function getTimeZoneOffset()
-    {
-        return $this->timeZoneOffset;
-    }
-
-        /**
      * @return string
      */
     public function getCategoryId()

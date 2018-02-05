@@ -22,6 +22,8 @@ class Post
     private $imageUrl;
     /** @var int */
     private $createdAt;
+    /** @var int */
+    private $timeZoneOffset;
 
     /** @var int */
     private $likes;
@@ -30,11 +32,12 @@ class Post
 
     /** @var Location */
     private $location;
-    /** @var  */
-    private $profile;
 
     /** @var array */
     private $properties;
+
+    private static $propertiesToSkip = ['firstName', 'lastName', 'gender', 'name', 'followedByCount', 'isVerified',
+        'mediaCount', 'followsCount', 'avatar', 'biography', 'location'];
 
     /**
      * Post constructor.
@@ -42,18 +45,18 @@ class Post
      */
     public function __construct(array $data)
     {
-        $this->source = Utils::get($data, 'source');
-        $this->id = Utils::get($data, 'id');
+        $this->source = Utils::getWithUnset($data, 'source');
+        $this->id = Utils::getWithUnset($data, 'id');
 
-        $this->userId = Utils::get($data, 'userId');
-        $this->screenName = Utils::get($data, 'screenName');
+        $this->userId = Utils::getWithUnset($data, 'userId');
+        $this->screenName = Utils::getWithUnset($data, 'screenName');
 
-        $this->text = Utils::get($data, 'text');
-        $this->imageUrl = Utils::get($data, 'imageUrl');
-        $this->createdAt = Utils::get($data, 'createdAt');
+        $this->text = Utils::getWithUnset($data, 'text');
+        $this->imageUrl = Utils::getWithUnset($data, 'imageUrl');
+        $this->createdAt = Utils::getWithUnset($data, 'createdAt');
 
-        $this->likes = Utils::get($data, 'likes');
-        $this->reposts = Utils::get($data, 'reposts');
+        $this->likes = Utils::getWithUnset($data, 'likes');
+        $this->reposts = Utils::getWithUnset($data, 'reposts');
 
         if (isset($data['properties'])) {
             $this->parseProperties($data['properties']);
@@ -64,15 +67,13 @@ class Post
     {
         if (isset($data['location'])) {
             $this->location = new Location($data['location']);
-            unset($data['location']);
         }
 
-        if (isset($data['profile'])) {
-            $this->profile = new Profile($data['profile']);
-            unset($data['profile']);
-        }
+        $this->timeZoneOffset = Utils::getWithUnset($data, 'timeZoneOffset');
 
-        $this->properties = $data;
+        $this->properties = array_filter($data, function($key) {
+            return !in_array($key, self::$propertiesToSkip);
+        }, ARRAY_FILTER_USE_KEY);
     }
 
     /**
@@ -134,6 +135,14 @@ class Post
     /**
      * @return int
      */
+    public function getTimeZoneOffset()
+    {
+        return $this->timeZoneOffset;
+    }
+
+    /**
+     * @return int
+     */
     public function getLikes()
     {
         return $this->likes;
@@ -153,14 +162,6 @@ class Post
     public function getLocation()
     {
         return $this->location;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getProfile()
-    {
-        return $this->profile;
     }
 
     /**

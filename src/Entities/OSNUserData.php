@@ -25,16 +25,15 @@ class OSNUserData
 
         $this->parseAccounts();
         $this->parsePosts();
-        $this->parseAttributes();
     }
 
     private function parseAccounts()
     {
-        if (!isset($this->rawData['ids'])) {
+        if (!isset($this->rawData['accounts'])) {
             return;
         }
 
-        foreach ($this->rawData['ids'] as $accountType => $accountData) {
+        foreach ($this->rawData['accounts'] as $accountType => $accountData) {
             if (is_array($accountData)) {
                 $this->accounts[$accountType] = new Account($accountData);
             }
@@ -50,15 +49,6 @@ class OSNUserData
         foreach ($this->rawData['posts'] as $postData) {
             $this->posts[] = new Post($postData);
         }
-    }
-
-    private function parseAttributes()
-    {
-        if (!isset($this->rawData['attributes'])) {
-            return;
-        }
-
-        $this->attributes = $this->rawData['attributes'];
     }
 
     /**
