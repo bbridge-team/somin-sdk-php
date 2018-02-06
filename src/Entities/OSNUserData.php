@@ -72,12 +72,4 @@ class OSNUserData
     {
         return $this->posts;
     }
-
-    /**
-     * @return array
-     */
-    public function getAttributes()
-    {
-        return $this->attributes;
-    }
 }
