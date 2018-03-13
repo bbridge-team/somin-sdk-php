@@ -3,8 +3,8 @@
 namespace SoMin\API\Crawler\Responses;
 
 use SoMin\Common\AbstractResponse;
-use SoMin\Entities\InstagramFollower;
 use SoMin\Entities\TwitterFollower;
+use SoMin\Entities\InstagramFollower;
 
 class CrawlerFollowers extends AbstractResponse
 {
@@ -22,13 +22,13 @@ class CrawlerFollowers extends AbstractResponse
 
         if (isset($data['followers'])) {
             foreach ($data['followers'] as $follower) {
-                $this->followers[] = new TwitterFollower($follower);
+                $this->followers[] = new InstagramFollower($follower);
             }
         }
 
         if (isset($data['follower_ids'])) {
             foreach ($data['follower_ids'] as $follower) {
-                $this->followers[] = new InstagramFollower($follower);
+                $this->followers[] = new TwitterFollower($follower);
             }
         }
     }

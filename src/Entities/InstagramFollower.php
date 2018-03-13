@@ -2,19 +2,49 @@
 
 namespace SoMin\Entities;
 
+use SoMin\Utils;
+
 class InstagramFollower
 {
     /** @var int */
     private $id;
 
+    /** @var string */
+    private $screenName;
+
+    /** @var string */
+    private $profilePicUrl;
+
+    /** @var string */
+    private $fullName;
+
     /**
-     * TwitterFollower constructor.
+     * InstagramFollower constructor.
      *
-     * @param $id
+     * @param array $data
      */
-    public function __construct($id)
+    public function __construct(array $data)
     {
-        $this->id = $id;
+        $this->id = Utils::get($data, 'id');
+        $this->screenName = Utils::get($data, 'screenName');
+        $this->profilePicUrl = Utils::get($data, 'profilePicUrl');
+        $this->fullName = Utils::get($data, 'fullName');
+    }
+
+    /**
+     * @return string
+     */
+    public function getProfilePicUrl()
+    {
+        return $this->profilePicUrl;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFullName()
+    {
+        return $this->fullName;
     }
 
     /**
@@ -23,5 +53,13 @@ class InstagramFollower
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @return string
+     */
+    public function getScreenName()
+    {
+        return $this->screenName;
     }
 }

@@ -14,7 +14,7 @@ class CrawlerRetrievalData extends AbstractRequest
      */
     public function __construct()
     {
-        $this->setRetrieveTill(NULL);
+        $this->setRetrieveTill(0);
     }
 
 
