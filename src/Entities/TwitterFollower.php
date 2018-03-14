@@ -2,6 +2,8 @@
 
 namespace SoMin\Entities;
 
+use SoMin\Utils;
+
 class TwitterFollower
 {
     /** @var int */
@@ -10,11 +12,11 @@ class TwitterFollower
     /**
      * TwitterFollower constructor.
      *
-     * @param $id
+     * @param array $data
      */
-    public function __construct($id)
+    public function __construct(array $data)
     {
-        $this->id = $id;
+        $this->id = Utils::get($data, 'id');;
     }
 
     /**
