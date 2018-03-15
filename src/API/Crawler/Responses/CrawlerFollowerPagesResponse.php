@@ -4,10 +4,10 @@ namespace SoMin\API\Crawler\Responses;
 
 use SoMin\Common\AbstractResponse;
 
-class CrawlerDataId extends AbstractResponse
+class CrawlerFollowerPagesResponse extends AbstractResponse
 {
-    /** @var string */
-    private $dataId;
+    /** @var string[] */
+    private $pageIds;
 
     /** @var int */
     private $crawledAt;
@@ -21,18 +21,18 @@ class CrawlerDataId extends AbstractResponse
             return;
         }
 
-        $this->dataId = $data['data_id'];
+        $this->pageIds = $data['data_id'];
         $this->crawledAt = $data['crawled_at'];
     }
 
     /**
      * Data identifier.
      *
-     * @return string
+     * @return string[]
      */
-    public function getDataId()
+    public function getPageIds()
     {
-        return $this->dataId;
+        return $this->pageIds;
     }
 
     /**

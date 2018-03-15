@@ -3,13 +3,15 @@
 namespace SoMin\Test;
 
 use SoMin\API\Crawler\CrawlerProcessor;
-use SoMin\API\Crawler\Requests\CrawlerDownloadData;
+use SoMin\API\Crawler\Requests\CrawlerContentData;
+use SoMin\API\Crawler\Requests\CrawlerFollowers;
+use SoMin\API\Crawler\Requests\CrawlerContent;
 use SoMin\API\Crawler\Requests\CrawlerFollowersData;
-use SoMin\API\Crawler\Requests\CrawlerRetrievalData;
 use SoMin\API\Crawler\Requests\DataSourceEnum;
-use SoMin\API\Crawler\Responses\CrawlerData;
-use SoMin\API\Crawler\Responses\CrawlerDataId;
-use SoMin\API\Crawler\Responses\CrawlerFollowers;
+use SoMin\API\Crawler\Responses\CrawlerContentDataResponse;
+use SoMin\API\Crawler\Responses\CrawlerContentDataIdResponse;
+use SoMin\API\Crawler\Responses\CrawlerFollowerPagesResponse;
+use SoMin\API\Crawler\Responses\CrawlerFollowersDataResponse;
 
 class CrawlerTest extends AbstractTest
 {
@@ -18,32 +20,34 @@ class CrawlerTest extends AbstractTest
         $this->authorize();
 
         $crawlerProcessor = new CrawlerProcessor($this->requester);
-        $retrieveRequest = (new CrawlerRetrievalData())
+        $retrieveRequest = (new CrawlerContent())
             ->setDataSource(DataSourceEnum::TWITTERMULTISOURCE)
-            ->setNumToRetrieve(10)
+            ->setPageSize(5)
+            ->setNumToRetrieve(15)
             ->setUserId('realdonaldtrump');
 
-        $dataIdResponse = $crawlerProcessor->retrieval($retrieveRequest);
+        $dataIdResponse = $crawlerProcessor->content($retrieveRequest);
         $this->assertRequestIDResponse($dataIdResponse);
 
-        /** @var CrawlerDataId $response */
-        $response = $this->receiveResponse($dataIdResponse->getRequestId(), CrawlerDataId::class);
+        /** @var CrawlerContentDataIdResponse $response */
+        $response = $this->receiveResponse($dataIdResponse->getRequestId(), CrawlerContentDataIdResponse::class);
         $this->assertNotNull($response);
-        $this->assertInstanceOf(CrawlerDataId::class, $response);
+        $this->assertInstanceOf(CrawlerContentDataIdResponse::class, $response);
         $this->assertEquals(200, $response->getHttpCode());
-        $this->assertNotEmpty($response->getDataId());
+        $this->assertNotEmpty($response->getPageIds());
         $this->assertNotEmpty($response->getCrawledAt());
 
-        $downloadRequest = (new CrawlerDownloadData())
-            ->setDataId($response->getDataId());
+        $downloadRequest = (new CrawlerContentData())
+            ->addPageId($response->getPageIds()[0])
+            ->addPageId($response->getPageIds()[1]);
 
-        $dataResponse = $crawlerProcessor->download($downloadRequest);
+        $dataResponse = $crawlerProcessor->contentDownload($downloadRequest);
         $this->assertRequestIDResponse($dataResponse);
 
-        /** @var CrawlerData $response */
-        $response = $this->receiveResponse($dataResponse->getRequestId(), CrawlerData::class);
+        /** @var CrawlerContentDataResponse $response */
+        $response = $this->receiveResponse($dataResponse->getRequestId(), CrawlerContentDataResponse::class);
         $this->assertNotNull($response);
-        $this->assertInstanceOf(CrawlerData::class, $response);
+        $this->assertInstanceOf(CrawlerContentDataResponse::class, $response);
         $this->assertEquals(200, $response->getHttpCode());
         $this->assertNotNull($response->getUserData());
     }
@@ -53,16 +57,32 @@ class CrawlerTest extends AbstractTest
         $this->authorize();
 
         $crawlerProcessor = new CrawlerProcessor($this->requester);
-        $followersRequest = (new CrawlerFollowersData())
-            ->setNumToRetrieve(10)
+        $followersRequest = (new CrawlerFollowers())
+            ->setNumToRetrieve(15)
+            ->setPageSize(5)
             ->setUserName('realdonaldtrump')
             ->setDataSource(DataSourceEnum::TWITTER);
 
-        $dataResponse = $crawlerProcessor->followers($followersRequest);
+        $dataIdResponse = $crawlerProcessor->followers($followersRequest);
+        $this->assertRequestIDResponse($dataIdResponse);
+
+        /** @var CrawlerFollowerPagesResponse $response */
+        $response = $this->receiveResponse($dataIdResponse->getRequestId(), CrawlerContentDataIdResponse::class);
+        $this->assertNotNull($response);
+        $this->assertInstanceOf(CrawlerFollowersDataResponse::class, $response);
+        $this->assertEquals(200, $response->getHttpCode());
+        $this->assertNotEmpty($response->getPageIds());
+        $this->assertNotEmpty($response->getCrawledAt());
+
+        $downloadRequest = (new CrawlerFollowersData())
+            ->addDataId($response->getPageIds()[0])
+            ->addDataId($response->getPageIds()[1]);
+
+        $dataResponse = $crawlerProcessor->followersDownload($downloadRequest);
         $this->assertRequestIDResponse($dataResponse);
 
-        /** @var CrawlerFollowers $response */
-        $response = $this->receiveResponse($dataResponse->getRequestId(), CrawlerFollowers::class);
+        /** @var CrawlerFollowersDataResponse $response */
+        $response = $this->receiveResponse($dataResponse->getRequestId(), CrawlerFollowerPagesResponse::class);
         $this->assertNotNull($response);
         $this->assertInstanceOf(CrawlerFollowers::class, $response);
         $this->assertEquals(200, $response->getHttpCode());

@@ -7,7 +7,7 @@ use SoMin\Common\AbstractResponse;
 use SoMin\Entities\TwitterFollower;
 use SoMin\Entities\InstagramFollower;
 
-class CrawlerFollowers extends AbstractResponse
+class CrawlerFollowersDataResponse extends AbstractResponse
 {
     /** @var array */
     private $followers = [];

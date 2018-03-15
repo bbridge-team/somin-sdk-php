@@ -7,17 +7,17 @@ use SoMin\Common\AbstractRequest;
 /**
  * Structure to be send in Crawler Download request.
  */
-class CrawlerDownloadData extends AbstractRequest
+class CrawlerContentData extends AbstractRequest
 {
     /**
-     * Data identifier for request.
+     * Page identifier for request.
      *
-     * @param string $dataId
+     * @param string $pageId
      * @return $this
      */
-    public function setDataId($dataId)
+    public function addPageId($pageId)
     {
-        $this->data['value'] = $dataId;
+        $this->data['values'][] = $pageId;
         return $this;
     }
 }

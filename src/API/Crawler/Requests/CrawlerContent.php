@@ -7,7 +7,7 @@ use SoMin\Common\AbstractRequest;
 /**
  * Structure to be send in Crawler Retrieval request.
  */
-class CrawlerRetrievalData extends AbstractRequest
+class CrawlerContent extends AbstractRequest
 {
     /**
      * CrawlerRetrievalData constructor.
@@ -16,7 +16,6 @@ class CrawlerRetrievalData extends AbstractRequest
     {
         $this->setRetrieveTill(0);
     }
-
 
     /**
      * User identifier (id, screename, email etc.)
@@ -27,6 +26,18 @@ class CrawlerRetrievalData extends AbstractRequest
     public function setUserId($userId)
     {
         $this->data['user_name'] = $userId;
+        return $this;
+    }
+
+    /**
+     * Number of records in the return page when paginating.
+     *
+     * @param int $pageSize
+     * @return $this
+     */
+    public function setPageSize($pageSize)
+    {
+        $this->params['page-size'] = $pageSize;
         return $this;
     }
 

@@ -5,7 +5,7 @@ namespace SoMin\API\Crawler\Responses;
 use SoMin\Common\AbstractResponse;
 use SoMin\Entities\OSNUserData;
 
-class CrawlerData extends AbstractResponse
+class CrawlerContentDataResponse extends AbstractResponse
 {
     /** @var OSNUserData */
     private $userData;
