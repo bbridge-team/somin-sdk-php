@@ -28,7 +28,7 @@ class CrawlerContentDataIdResponse extends AbstractResponse
     /**
      * Page identifiers.
      *
-     * @return string
+     * @return string[]
      */
     public function getPageIds()
     {

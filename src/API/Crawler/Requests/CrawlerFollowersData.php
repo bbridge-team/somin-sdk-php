@@ -10,14 +10,32 @@ use SoMin\Common\AbstractRequest;
 class CrawlerFollowersData extends AbstractRequest
 {
     /**
+     * CrawlerFollowersData constructor.
+     */
+    public function __construct()
+    {
+        $this->data['value'] = null;
+    }
+
+    /**
      * Data identifier for request.
      *
-     * @param string $dataId
+     * @param string $pageId
      * @return $this
      */
-    public function addDataId($dataId)
+    public function setPageId($pageId)
     {
-        $this->data['values'][] = $dataId;
+        $this->data['value'] = $pageId;
         return $this;
+    }
+
+    /**
+     * Gets page id.
+     *
+     * @return null|string
+     */
+    public function getPageId()
+    {
+        return $this->data['value'];
     }
 }
