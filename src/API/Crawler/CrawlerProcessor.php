@@ -57,6 +57,6 @@ class CrawlerProcessor extends APIRequester
      */
     public function followersDownload(CrawlerFollowersData $contentData)
     {
-        return $this->post('data/followers/download', $contentData, CrawlerFollowersDataResponse::class);
+        return $this->post('data/followers/download', $contentData, RequestIDResponse::class);
     }
 }

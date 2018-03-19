@@ -21,7 +21,7 @@ class CrawlerContentDataIdResponse extends AbstractResponse
             return;
         }
 
-        $this->pageIds = $data['data_id'];
+        $this->pageIds = $data['data_ids'];
         $this->crawledAt = $data['crawled_at'];
     }
 

@@ -14,7 +14,7 @@ class CrawlerFollowersData extends AbstractRequest
      */
     public function __construct()
     {
-        $this->data['value'] = null;
+        $this->data['data_id'] = null;
     }
 
     /**
@@ -25,7 +25,7 @@ class CrawlerFollowersData extends AbstractRequest
      */
     public function setPageId($pageId)
     {
-        $this->data['value'] = $pageId;
+        $this->data['data_id'] = $pageId;
         return $this;
     }
 
@@ -36,6 +36,6 @@ class CrawlerFollowersData extends AbstractRequest
      */
     public function getPageId()
     {
-        return $this->data['value'];
+        return $this->data['data_id'];
     }
 }

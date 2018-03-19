@@ -38,8 +38,7 @@ class CrawlerTest extends AbstractTest
         $this->assertNotEmpty($response->getCrawledAt());
 
         $downloadRequest = (new CrawlerContentData())
-            ->addPageId($response->getPageIds()[0])
-            ->addPageId($response->getPageIds()[1]);
+            ->setPageId($response->getPageIds()[0]);
 
         $dataResponse = $crawlerProcessor->contentDownload($downloadRequest);
         $this->assertRequestIDResponse($dataResponse);
@@ -67,24 +66,23 @@ class CrawlerTest extends AbstractTest
         $this->assertRequestIDResponse($dataIdResponse);
 
         /** @var CrawlerFollowerPagesResponse $response */
-        $response = $this->receiveResponse($dataIdResponse->getRequestId(), CrawlerContentDataIdResponse::class);
+        $response = $this->receiveResponse($dataIdResponse->getRequestId(), CrawlerFollowerPagesResponse::class);
         $this->assertNotNull($response);
-        $this->assertInstanceOf(CrawlerFollowersDataResponse::class, $response);
+        $this->assertInstanceOf(CrawlerFollowerPagesResponse::class, $response);
         $this->assertEquals(200, $response->getHttpCode());
         $this->assertNotEmpty($response->getPageIds());
         $this->assertNotEmpty($response->getCrawledAt());
 
         $downloadRequest = (new CrawlerFollowersData())
-            ->addDataId($response->getPageIds()[0])
-            ->addDataId($response->getPageIds()[1]);
+            ->setPageId($response->getPageIds()[0]);
 
         $dataResponse = $crawlerProcessor->followersDownload($downloadRequest);
         $this->assertRequestIDResponse($dataResponse);
 
         /** @var CrawlerFollowersDataResponse $response */
-        $response = $this->receiveResponse($dataResponse->getRequestId(), CrawlerFollowerPagesResponse::class);
+        $response = $this->receiveResponse($dataResponse->getRequestId(), CrawlerFollowersDataResponse::class);
         $this->assertNotNull($response);
-        $this->assertInstanceOf(CrawlerFollowers::class, $response);
+        $this->assertInstanceOf(CrawlerFollowersDataResponse::class, $response);
         $this->assertEquals(200, $response->getHttpCode());
         $this->assertNotNull($response->getFollowers());
     }
