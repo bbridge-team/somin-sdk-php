@@ -34,8 +34,8 @@ class CrawlerFollowersDataResponse extends AbstractResponse
                 throw new \Exception("Unsupported follower type '$data[source]'.");
         }
 
-        if (isset($data['followers'])) {
-            foreach ($data['followers'] as $follower) {
+        if (isset($data['osn_followers_data'])) {
+            foreach ($data['osn_followers_data'] as $follower) {
                 $this->followers[] = new $followerClass($follower);
             }
         }
