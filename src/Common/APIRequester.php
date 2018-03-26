@@ -9,9 +9,11 @@ use SoMin\Common\Interfaces\HttpRequesterInterface;
 abstract class APIRequester
 {
     const API_VERSION   = '1';
-    const API_HOST      = 'http://somin.online:1024';
+    const API_HOST      = 'http://somin.online:1030';
 
     private $requester = null;
+    private $host = null;
+    private $version = null;
 
     /**
      * APIRequester constructor.
@@ -41,6 +43,50 @@ abstract class APIRequester
 
     private function buildUrl($urlSuffix)
     {
-        return self::API_HOST . '/v' . self::API_VERSION . '/' . $urlSuffix;
+        return $this->getHost() . '/v' . $this->getVersion() . '/' . $urlSuffix;
+    }
+
+    /**
+     * @return null
+     */
+    public function getHost()
+    {
+        if (empty($this->host)) {
+            $this->host = self::API_HOST;
+        }
+
+        return $this->host;
+    }
+
+    /**
+     * @param null $host
+     * @return APIRequester
+     */
+    public function setHost($host)
+    {
+        $this->host = $host;
+        return $this;
+    }
+
+    /**
+     * @return null
+     */
+    public function getVersion()
+    {
+        if (empty($this->version)) {
+            $this->version = self::API_VERSION;
+        }
+
+        return $this->version;
+    }
+
+    /**
+     * @param null $version
+     * @return APIRequester
+     */
+    public function setVersion($version)
+    {
+        $this->version = $version;
+        return $this;
     }
 }
