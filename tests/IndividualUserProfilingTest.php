@@ -30,7 +30,8 @@ class IndividualUserProfilingTest extends AbstractTest
             ->withGender()
             ->withIncome()
             ->withOccupation()
-            ->withRelationship();
+            ->withRelationship()
+            ->withMBTI();
 
         $requestResponse = $userProfiler->predictIndividualUserProfile($request);
         $this->assertRequestIDResponse($requestResponse);

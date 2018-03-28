@@ -23,6 +23,9 @@ class IndividualUserProfile extends AbstractResponse
     /** @var string */
     private $occupationIndustry;
 
+    /** @var array */
+    private $mbti = [];
+
     /**
      * @param $data
      */
@@ -58,6 +61,19 @@ class IndividualUserProfile extends AbstractResponse
 
         if (!empty($profiling['occupation'])) {
             $this->occupationIndustry = $profiling['occupation'];
+        }
+
+        if (!empty($profiling['jp'])) {
+            $this->mbti['jp'] = $profiling['jp'];
+        }
+        if (!empty($profiling['ei'])) {
+            $this->mbti['ei'] = $profiling['ei'];
+        }
+        if (!empty($profiling['tf'])) {
+            $this->mbti['tf'] = $profiling['tf'];
+        }
+        if (!empty($profiling['si'])) {
+            $this->mbti['si'] = $profiling['si'];
         }
     }
 
@@ -119,5 +135,13 @@ class IndividualUserProfile extends AbstractResponse
     public function getOccupationIndustry()
     {
         return $this->occupationIndustry;
+    }
+
+    /**
+     * @return array
+     */
+    public function getMbti()
+    {
+        return $this->mbti;
     }
 }

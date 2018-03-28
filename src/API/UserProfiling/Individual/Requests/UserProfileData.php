@@ -48,6 +48,20 @@ class UserProfileData extends AbstractRequest
     }
 
     /**
+     * Defines if the MBTI needs to be predicted.
+     *
+     * @return UserProfileData
+     */
+    public function withMBTI()
+    {
+        return $this
+            ->addSettings('ei')
+            ->addSettings('si')
+            ->addSettings('tf')
+            ->addSettings('jp');
+    }
+
+    /**
      * Defines if the Gender needs to be predicted.
      *
      * @return UserProfileData
