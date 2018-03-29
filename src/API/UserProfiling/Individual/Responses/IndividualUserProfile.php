@@ -10,17 +10,17 @@ use SoMin\Common\AbstractResponse;
  */
 class IndividualUserProfile extends AbstractResponse
 {
-    /** @var string */
+    /** @var array */
     private $gender;
-    /** @var string */
+    /** @var array */
     private $ageGroup;
-    /** @var string */
+    /** @var array */
     private $educationLevel;
-    /** @var string */
+    /** @var array */
     private $relationshipStatus;
-    /** @var string */
+    /** @var array */
     private $incomeLevel;
-    /** @var string */
+    /** @var array */
     private $occupationIndustry;
 
     /** @var array */
@@ -80,7 +80,7 @@ class IndividualUserProfile extends AbstractResponse
     /**
      * Detected gender.
      *
-     * @return string
+     * @return array|null
      */
     public function getGender()
     {
@@ -90,7 +90,7 @@ class IndividualUserProfile extends AbstractResponse
     /**
      * Detected age group.
      *
-     * @return string
+     * @return array|null
      */
     public function getAgeGroup()
     {
@@ -100,7 +100,7 @@ class IndividualUserProfile extends AbstractResponse
     /**
      * Detected Education Level.
      *
-     * @return string
+     * @return array|null
      */
     public function getEducationLevel()
     {
@@ -110,7 +110,7 @@ class IndividualUserProfile extends AbstractResponse
     /**
      * Detected Relationship Status.
      *
-     * @return string
+     * @return array|null
      */
     public function getRelationshipStatus()
     {
@@ -120,7 +120,7 @@ class IndividualUserProfile extends AbstractResponse
     /**
      * Detected Income Level.
      *
-     * @return string
+     * @return array|null
      */
     public function getIncomeLevel()
     {
@@ -130,7 +130,7 @@ class IndividualUserProfile extends AbstractResponse
     /**
      * Detected Occupation Industry.
      *
-     * @return string
+     * @return array|null
      */
     public function getOccupationIndustry()
     {
@@ -138,7 +138,7 @@ class IndividualUserProfile extends AbstractResponse
     }
 
     /**
-     * @return array
+     * @return array|null
      */
     public function getMbti()
     {
