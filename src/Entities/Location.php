@@ -14,10 +14,8 @@ class Location
     private $lat;
     /** @var float */
     private $lng;
-    /** @var string */
-    private $categoryId;
-    /** @var string */
-    private $categoryName;
+    /** @var array */
+    private $categories = [];
 
     /**
      * Location constructor.
@@ -29,8 +27,8 @@ class Location
         $this->name = Utils::get($data, 'name');
         $this->lat = Utils::get($data, 'lat');
         $this->lng = Utils::get($data, 'lng');
-        $this->categoryId = Utils::get($data, 'venueCategoryId');
-        $this->categoryName = Utils::get($data, 'venueCategoryName');
+
+        $this->categories = Utils::get($data, 'categories');
     }
 
     /**

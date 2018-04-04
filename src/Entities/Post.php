@@ -36,9 +36,6 @@ class Post
     /** @var array */
     private $properties;
 
-    private static $propertiesToSkip = ['firstName', 'lastName', 'gender', 'name', 'followedByCount', 'isVerified',
-        'mediaCount', 'followsCount', 'avatar', 'biography', 'location'];
-
     /**
      * Post constructor.
      * @param array $data
@@ -55,25 +52,16 @@ class Post
         $this->imageUrl = Utils::getWithUnset($data, 'imageUrl');
         $this->createdAt = Utils::getWithUnset($data, 'createdAt');
 
+        $this->timeZoneOffset = Utils::getWithUnset($data, 'timeZoneOffset');
+
         $this->likes = Utils::getWithUnset($data, 'likes');
         $this->reposts = Utils::getWithUnset($data, 'reposts');
 
-        if (isset($data['properties'])) {
-            $this->parseProperties($data['properties']);
-        }
-    }
+        $this->properties = Utils::get($data, 'properties');
 
-    private function parseProperties($data)
-    {
         if (isset($data['location'])) {
             $this->location = new Location($data['location']);
         }
-
-        $this->timeZoneOffset = Utils::getWithUnset($data, 'timeZoneOffset');
-
-        $this->properties = array_filter($data, function($key) {
-            return !in_array($key, self::$propertiesToSkip);
-        }, ARRAY_FILTER_USE_KEY);
     }
 
     /**

@@ -24,8 +24,7 @@ class CrawlerTest extends AbstractTest
             ->setDataSource(DataSourceEnum::TWITTERMULTISOURCE)
             ->setPageSize(5)
             ->setNumToRetrieve(100)
-            ->setUserId('farseevs');
-//            ->setUserId('realdonaldtrump');
+            ->setUserId('realdonaldtrump');
 
         $dataIdResponse = $crawlerProcessor->content($retrieveRequest);
         $this->assertRequestIDResponse($dataIdResponse);
