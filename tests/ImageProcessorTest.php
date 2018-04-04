@@ -45,8 +45,8 @@ class ImageProcessorTest extends AbstractTest
         $imageProcessor = new ImageProcessor($this->requester);
         $request = (new ConceptDetectionData())
             ->setImageURLs([
-                'https://github.com/bbridge-team/somin-sdk-php/raw/master/tests/cats.jpg',
-                'https://github.com/bbridge-team/somin-sdk-php/raw/master/tests/dogs.jpg'
+                'https://raw.githubusercontent.com/bbridge-team/somin-sdk-php/master/tests/cats.jpg',
+                'https://raw.githubusercontent.com/bbridge-team/somin-sdk-php/master/tests/dogs.jpg'
             ])
             ->setTopNumToReturn(5);
 
