@@ -50,7 +50,9 @@ class Post
 
         $this->text = Utils::getWithUnset($data, 'text');
         $this->imageUrl = Utils::getWithUnset($data, 'imageUrl');
-        $this->createdAt = Utils::getWithUnset($data, 'createdAt');
+        if (isset($attributes['createdAt'])) {
+            $this->createdAt = new \DateTime('@'.Utils::getWithUnset($data, 'createdAt'));
+        }
 
         $this->timeZoneOffset = Utils::getWithUnset($data, 'timeZoneOffset');
 
