@@ -4,19 +4,22 @@ namespace SoMin\Entities;
 
 use SoMin\Utils;
 
-class InstagramFollower
+class Follower
 {
-    /** @var int */
+    /** @var int|null */
     private $id;
 
-    /** @var string */
+    /** @var string|null */
     private $screenName;
 
-    /** @var string */
+    /** @var string|null */
     private $profilePicUrl;
 
-    /** @var string */
+    /** @var string|null */
     private $fullName;
+
+    /** @var string */
+    private $source;
 
     /**
      * InstagramFollower constructor.
@@ -32,7 +35,7 @@ class InstagramFollower
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getProfilePicUrl()
     {
@@ -40,7 +43,7 @@ class InstagramFollower
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getFullName()
     {
@@ -48,7 +51,7 @@ class InstagramFollower
     }
 
     /**
-     * @return int
+     * @return int|null
      */
     public function getId()
     {
@@ -56,10 +59,28 @@ class InstagramFollower
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getScreenName()
     {
         return $this->screenName;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSource()
+    {
+        return $this->source;
+    }
+
+    /**
+     * @param string $source
+     * @return Follower
+     */
+    public function setSource($source)
+    {
+        $this->source = $source;
+        return $this;
     }
 }

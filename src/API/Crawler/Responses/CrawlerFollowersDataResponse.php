@@ -2,10 +2,8 @@
 
 namespace SoMin\API\Crawler\Responses;
 
-use SoMin\API\Crawler\Requests\DataSourceEnum;
 use SoMin\Common\AbstractResponse;
-use SoMin\Entities\TwitterFollower;
-use SoMin\Entities\InstagramFollower;
+use SoMin\Entities\Follower;
 
 class CrawlerFollowersDataResponse extends AbstractResponse
 {
@@ -22,21 +20,12 @@ class CrawlerFollowersDataResponse extends AbstractResponse
             return;
         }
 
-        $followerClass = null;
-        switch($data['source']) {
-            case DataSourceEnum::TWITTER:
-                $followerClass = TwitterFollower::class;
-                break;
-            case DataSourceEnum::INSTAGRAM:
-                $followerClass = InstagramFollower::class;
-                break;
-            default:
-                throw new \Exception("Unsupported follower type '$data[source]'.");
-        }
-
         if (isset($data['osn_followers_data'])) {
-            foreach ($data['osn_followers_data'] as $follower) {
-                $this->followers[] = new $followerClass($follower);
+            foreach ($data['osn_followers_data'] as $followerData) {
+                 $follower = new Follower($followerData);
+                 $follower->setSource($data['source']);
+
+                 $this->followers[] = $follower;
             }
         }
     }
