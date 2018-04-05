@@ -77,10 +77,10 @@ class Account
         $this->personalUrl = Utils::getWithUnset($attributes, 'personalUrl');
 
         if (isset($attributes['birthdayAt'])) {
-            $this->birthdayAt = new \DateTime('@'.Utils::getWithUnset($attributes, 'birthdayAt'));
+            $this->birthdayAt = new \DateTime('@'.Utils::getWithUnset($attributes, 'birthdayAt') / 1000);
         }
         if (isset($attributes['joinedAt'])) {
-            $this->joinedAt = new \DateTime('@'.Utils::getWithUnset($attributes, 'joinedAt'));
+            $this->joinedAt = new \DateTime('@'.Utils::getWithUnset($attributes, 'joinedAt') / 1000);
         }
 
         $this->isVerified = Utils::getWithUnset($attributes, 'isVerified');
