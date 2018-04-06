@@ -64,18 +64,10 @@ class Location
     }
 
     /**
-     * @return string
+     * @return array
      */
-    public function getCategoryId()
+    public function getCategories()
     {
-        return $this->categoryId;
-    }
-
-    /**
-     * @return string
-     */
-    public function getCategoryName()
-    {
-        return $this->categoryName;
+        return $this->categories;
     }
 }

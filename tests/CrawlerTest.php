@@ -22,7 +22,7 @@ class CrawlerTest extends AbstractTest
         $crawlerProcessor = new CrawlerProcessor($this->requester);
         $retrieveRequest = (new CrawlerContent())
             ->setDataSource(DataSourceEnum::TWITTERMULTISOURCE)
-            ->setPageSize(5)
+            ->setPageSize(20)
             ->setNumToRetrieve(100)
             ->setUserId('realdonaldtrump');
 
