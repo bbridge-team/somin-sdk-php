@@ -10,20 +10,20 @@ use SoMin\Common\AbstractResponse;
  */
 class IndividualUserProfile extends AbstractResponse
 {
-    /** @var array */
+    /** @var PredictedData */
     private $gender;
-    /** @var array */
+    /** @var PredictedData */
     private $ageGroup;
-    /** @var array */
+    /** @var PredictedData */
     private $educationLevel;
-    /** @var array */
+    /** @var PredictedData */
     private $relationshipStatus;
-    /** @var array */
+    /** @var PredictedData */
     private $incomeLevel;
-    /** @var array */
+    /** @var PredictedData */
     private $occupationIndustry;
 
-    /** @var array */
+    /** @var PredictedData[] */
     private $mbti = [];
 
     /**
@@ -40,47 +40,45 @@ class IndividualUserProfile extends AbstractResponse
 
         $profiling = $data['profiling'];
         if (!empty($profiling['gender'])) {
-            $this->gender = $profiling['gender'];
+            $this->gender = new PredictedData($profiling['gender']);
         }
 
         if (!empty($profiling['age_group'])) {
-            $this->ageGroup = $profiling['age_group'];
+            $this->ageGroup = new PredictedData($profiling['age_group']);
         }
 
         if (!empty($profiling['education_level'])) {
-            $this->educationLevel = $profiling['education_level'];
+            $this->educationLevel = new PredictedData($profiling['education_level']);
         }
 
         if (!empty($profiling['relationship'])) {
-            $this->relationshipStatus = $profiling['relationship'];
+            $this->relationshipStatus = new PredictedData($profiling['relationship']);
         }
 
         if (!empty($profiling['income'])) {
-            $this->incomeLevel = $profiling['income'];
+            $this->incomeLevel = new PredictedData($profiling['income']);
         }
 
         if (!empty($profiling['occupation'])) {
-            $this->occupationIndustry = $profiling['occupation'];
+            $this->occupationIndustry = new PredictedData($profiling['occupation']);
         }
 
         if (!empty($profiling['jp'])) {
-            $this->mbti['jp'] = $profiling['jp'];
+            $this->mbti['jp'] = new PredictedData($profiling['jp']);
         }
         if (!empty($profiling['ei'])) {
-            $this->mbti['ei'] = $profiling['ei'];
+            $this->mbti['ei'] = new PredictedData($profiling['ei']);
         }
         if (!empty($profiling['tf'])) {
-            $this->mbti['tf'] = $profiling['tf'];
+            $this->mbti['tf'] = new PredictedData($profiling['tf']);
         }
         if (!empty($profiling['si'])) {
-            $this->mbti['si'] = $profiling['si'];
+            $this->mbti['si'] = new PredictedData($profiling['si']);
         }
     }
 
     /**
-     * Detected gender.
-     *
-     * @return array|null
+     * @return PredictedData
      */
     public function getGender()
     {
@@ -88,9 +86,7 @@ class IndividualUserProfile extends AbstractResponse
     }
 
     /**
-     * Detected age group.
-     *
-     * @return array|null
+     * @return PredictedData
      */
     public function getAgeGroup()
     {
@@ -98,9 +94,7 @@ class IndividualUserProfile extends AbstractResponse
     }
 
     /**
-     * Detected Education Level.
-     *
-     * @return array|null
+     * @return PredictedData
      */
     public function getEducationLevel()
     {
@@ -108,9 +102,7 @@ class IndividualUserProfile extends AbstractResponse
     }
 
     /**
-     * Detected Relationship Status.
-     *
-     * @return array|null
+     * @return PredictedData
      */
     public function getRelationshipStatus()
     {
@@ -118,9 +110,7 @@ class IndividualUserProfile extends AbstractResponse
     }
 
     /**
-     * Detected Income Level.
-     *
-     * @return array|null
+     * @return PredictedData
      */
     public function getIncomeLevel()
     {
@@ -128,9 +118,7 @@ class IndividualUserProfile extends AbstractResponse
     }
 
     /**
-     * Detected Occupation Industry.
-     *
-     * @return array|null
+     * @return PredictedData
      */
     public function getOccupationIndustry()
     {
@@ -138,7 +126,7 @@ class IndividualUserProfile extends AbstractResponse
     }
 
     /**
-     * @return array|null
+     * @return PredictedData[]
      */
     public function getMbti()
     {
