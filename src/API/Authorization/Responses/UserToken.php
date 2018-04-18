@@ -1,8 +1,6 @@
 <?php
 
-
 namespace SoMin\API\Authorization\Responses;
-
 
 use SoMin\Common\AbstractResponse;
 
@@ -16,6 +14,8 @@ class UserToken extends AbstractResponse
      */
     public function setData($data)
     {
+        parent::setData($data);
+
         if (!empty($data['token'])) {
             $this->token = $data['token'];
         }

@@ -16,9 +16,13 @@ abstract class AbstractTest extends \PHPUnit_Framework_TestCase
     /** @var SimpleHttpRequester */
     protected $requester;
 
+    /** @var int */
+    protected $numAttempts;
+
     protected function setUp()
     {
         $this->requester = new SimpleHttpRequester();
+        $this->numAttempts = self::RESPONSE_WAIT_NUM_ATTEMPTS;
     }
 
     protected function authorize()
@@ -43,7 +47,7 @@ abstract class AbstractTest extends \PHPUnit_Framework_TestCase
 
         $commonProcessor = new CommonProcessor($this->requester);
 
-        $numAttempts = self::RESPONSE_WAIT_NUM_ATTEMPTS;
+        $numAttempts = $this->numAttempts;
         $response = null;   /** @var $response AbstractResponse */
 
         while($numAttempts-- > 0 && ($response == null || $response->getHttpCode() !== 200)) {

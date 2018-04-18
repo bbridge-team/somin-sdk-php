@@ -1,6 +1,5 @@
 <?php
 
-
 namespace SoMin\Common;
 
 /**
@@ -14,6 +13,8 @@ abstract class AbstractResponse
     protected $headers = [];
     /** @var array HTTP headers from the most recent request that start with X */
     private $xHeaders = [];
+    /** @var string Text of raised error. */
+    private $error;
 
     /**
      * @param array $headers
@@ -45,7 +46,12 @@ abstract class AbstractResponse
     /**
      * @param $data
      */
-    public abstract function setData($data);
+    public function setData($data)
+    {
+        if (!empty($data['error'])) {
+            $this->error = $data['error'];
+        }
+    }
 
     /**
      * @return int
@@ -69,5 +75,15 @@ abstract class AbstractResponse
     public function getXHeaders()
     {
         return $this->xHeaders;
+    }
+
+    /**
+     * Error message if request went wrong. Null if request is successful.
+     *
+     * @return string|null
+     */
+    public function getError()
+    {
+        return $this->error;
     }
 }

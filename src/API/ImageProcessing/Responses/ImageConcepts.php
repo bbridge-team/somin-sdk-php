@@ -10,7 +10,6 @@ use SoMin\Common\AbstractResponse;
  */
 class ImageConcepts extends AbstractResponse
 {
-    private $error;
     private $distributions;
 
     /**
@@ -18,23 +17,11 @@ class ImageConcepts extends AbstractResponse
      */
     public function setData($data)
     {
-        if (!empty($data['error'])) {
-            $this->error = $data['error'];
-        }
+        parent::setData($data);
 
         if ($this->getHttpCode() == 200) {
             $this->distributions = $data['results'];
         }
-    }
-
-    /**
-     * Error message if request went wrong. Null if request is successful.
-     *
-     * @return string|null
-     */
-    public function getError()
-    {
-        return $this->error;
     }
 
     /**

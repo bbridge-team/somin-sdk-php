@@ -1,13 +1,8 @@
 <?php
 
-
 namespace SoMin\API\NLP;
 
-
 use SoMin\API\NLP\Requests\NLPUserGeneratedContent;
-use SoMin\API\NLP\Responses\NamedEntities;
-use SoMin\API\NLP\Responses\POSTags;
-use SoMin\API\NLP\Responses\Sentiment;
 use SoMin\Common\APIRequester;
 use SoMin\Common\RequestIDResponse;
 
@@ -28,7 +23,7 @@ class NLPProcessor extends APIRequester
     }
 
     /**
-     * Performs Sentiment Analaysis.
+     * Performs Sentiment Analysis.
      *
      * @param NLPUserGeneratedContent $request User generated text data.
      * @return RequestIDResponse

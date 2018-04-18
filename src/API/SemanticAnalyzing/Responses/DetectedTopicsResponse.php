@@ -1,17 +1,14 @@
 <?php
 
-namespace SoMin\API\NLP\Responses;
+namespace SoMin\API\SemanticAnalyzing\Responses;
 
 use SoMin\Common\AbstractResponse;
 
-class Sentiment extends AbstractResponse
+class DetectedTopicsResponse extends AbstractResponse
 {
     /** @var array */
-    private $sentiments;
+    private $topicsList;
 
-    /**
-     * @param $data
-     */
     public function setData($data)
     {
         parent::setData($data);
@@ -20,14 +17,14 @@ class Sentiment extends AbstractResponse
             return;
         }
 
-        $this->sentiments = $data['results'];
+        $this->topicsList = $data['topics_list'];
     }
 
     /**
      * @return array
      */
-    public function getSentiments()
+    public function getTopicsList()
     {
-        return $this->sentiments;
+        return $this->topicsList;
     }
 }

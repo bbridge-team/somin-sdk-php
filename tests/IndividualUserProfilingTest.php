@@ -1,8 +1,6 @@
 <?php
 
-
 namespace SoMin\Test;
-
 
 use SoMin\API\UserProfiling\Individual\IndividualUserProfiler;
 use SoMin\API\UserProfiling\Individual\Requests\UserProfileData;

@@ -1,8 +1,6 @@
 <?php
 
-
 namespace SoMin\Test;
-
 
 use SoMin\API\NLP\NLPProcessor;
 use SoMin\API\NLP\Requests\NLPUserGeneratedContent;

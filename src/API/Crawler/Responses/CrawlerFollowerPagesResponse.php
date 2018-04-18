@@ -17,6 +17,8 @@ class CrawlerFollowerPagesResponse extends AbstractResponse
      */
     public function setData($data)
     {
+        parent::setData($data);
+
         if ($this->getHttpCode() != 200) {
             return;
         }
