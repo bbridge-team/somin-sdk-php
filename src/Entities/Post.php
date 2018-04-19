@@ -50,7 +50,7 @@ class Post
 
         $this->text = Utils::getWithUnset($data, 'text');
         $this->imageUrl = Utils::getWithUnset($data, 'imageUrl');
-        if (isset($attributes['createdAt'])) {
+        if (isset($data['createdAt'])) {
             $this->createdAt = new \DateTime('@'.Utils::getWithUnset($data, 'createdAt'));
         }
 
