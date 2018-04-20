@@ -48,8 +48,8 @@ abstract class AbstractResponse
      */
     public function setData($data)
     {
-        if (!empty($data['error'])) {
-            $this->error = $data['error'];
+        if ($this->getHttpCode() >= 400 && !empty($data['message'])) {
+            $this->error = $data['message'];
         }
     }
 
