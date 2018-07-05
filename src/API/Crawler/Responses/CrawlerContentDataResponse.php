@@ -21,7 +21,7 @@ class CrawlerContentDataResponse extends AbstractResponse
             return;
         }
 
-        $this->userData = new OSNUserData($data['osn_user_data']);
+        $this->userData = new OSNUserData($data['osnUserData']);
     }
 
     /**

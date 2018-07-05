@@ -19,9 +19,9 @@ class CrawlerProcessor extends APIRequester
      *
      * @return RequestIDResponse
      */
-    public function content(CrawlerContent $content)
+    public function user(CrawlerContent $content)
     {
-        return $this->post('data/content', $content, RequestIDResponse::class);
+        return $this->post('data/user', $content, RequestIDResponse::class);
     }
 
     /**

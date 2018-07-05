@@ -18,14 +18,27 @@ class CrawlerContent extends AbstractRequest
     }
 
     /**
-     * User identifier (id, screename, email etc.)
+     * User id in social network.
      *
      * @param string $userId
      * @return $this
      */
     public function setUserId($userId)
     {
-        $this->data['user_name'] = $userId;
+        $this->data['id'] = $userId;
+        return $this;
+    }
+
+    /**
+     * User string identifier.
+     *
+     * @param $userName
+     * @return $this
+     */
+    public function setUserName($userName)
+    {
+        $this->data['username'] = $userName;
+
         return $this;
     }
 
@@ -54,6 +67,30 @@ class CrawlerContent extends AbstractRequest
     }
 
     /**
+     * Crawl posts data.
+     *
+     * @return $this
+     */
+    public function withPosts()
+    {
+        $this->data['posts'] = true;
+
+        return $this;
+    }
+
+    /**
+     * Crawl profile data.
+     *
+     * @return $this
+     */
+    public function withProfile()
+    {
+        $this->data['profile'] = true;
+
+        return $this;
+    }
+
+    /**
      * Count of retrieval data.
      *
      * @param int $numToRetrieve
@@ -62,6 +99,19 @@ class CrawlerContent extends AbstractRequest
     public function setNumToRetrieve($numToRetrieve)
     {
         $this->params['num-retrieve'] = $numToRetrieve;
+        return $this;
+    }
+
+    /**
+     * Add social network to recursive crawling.
+     *
+     * @param $dataSource
+     * @return $this
+     */
+    public function addRecursive($dataSource)
+    {
+        $this->data['recursive'][] = $dataSource;
+
         return $this;
     }
 

@@ -59,11 +59,13 @@ class Post
         $this->likes = Utils::getWithUnset($data, 'likes');
         $this->reposts = Utils::getWithUnset($data, 'reposts');
 
-        $this->properties = Utils::get($data, 'properties');
+        $properties = Utils::get($data, 'properties', []);
 
-        if (isset($data['location'])) {
-            $this->location = new Location($data['location']);
+        if (isset($properties['location'])) {
+            $this->location = new Location(Utils::getWithUnset($properties, 'location'));
         }
+
+        $this->properties = $properties;
     }
 
     /**
