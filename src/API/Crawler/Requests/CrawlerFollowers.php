@@ -42,7 +42,7 @@ class CrawlerFollowers extends AbstractRequest
      */
     public function setUserName($username)
     {
-        $this->data['user_name'] = $username;
+        $this->data['username'] = $username;
         return $this;
     }
 
