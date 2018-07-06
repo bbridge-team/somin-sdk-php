@@ -4,6 +4,7 @@ namespace SoMin\API\Crawler\Responses;
 
 use SoMin\Common\AbstractResponse;
 use SoMin\Entities\Follower;
+use SoMin\Utils;
 
 class CrawlerFollowersDataResponse extends AbstractResponse
 {
@@ -22,10 +23,12 @@ class CrawlerFollowersDataResponse extends AbstractResponse
             return;
         }
 
-        if (isset($data['osn_followers_data'])) {
-            foreach ($data['osn_followers_data'] as $followerData) {
+        $source = Utils::get($data, 'source');
+
+        if (isset($data['osnUserData'])) {
+            foreach ($data['osnUserData'] as $followerData) {
                  $follower = new Follower($followerData);
-                 $follower->setSource($data['source']);
+                 $follower->setSource($source);
 
                  $this->followers[] = $follower;
             }
