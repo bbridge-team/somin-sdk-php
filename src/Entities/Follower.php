@@ -13,7 +13,7 @@ class Follower
     private $screenName;
 
     /** @var string|null */
-    private $profilePicURL;
+    private $profilePicUrl;
 
     /** @var string|null */
     private $fullName;
@@ -31,7 +31,7 @@ class Follower
         $this->id = Utils::get($data, 'id');
         $this->screenName = Utils::get($data, 'screenName');
         $this->fullName = Utils::get($data, 'fullName');
-        $this->profilePicURL = Utils::get($data, 'profilePicUrl');
+        $this->profilePicUrl = Utils::get($data, 'profilePicURL');
     }
 
     /**
@@ -71,18 +71,18 @@ class Follower
     /**
      * @return null|string
      */
-    public function getProfilePicURL()
+    public function getProfilePicUrl()
     {
-        return $this->profilePicURL;
+        return $this->profilePicUrl;
     }
 
     /**
-     * @param null|string $profilePicURL
+     * @param null|string $profilePicUrl
      * @return Follower
      */
-    public function setProfilePicURL($profilePicURL)
+    public function setProfilePicUrl($profilePicUrl)
     {
-        $this->profilePicURL = $profilePicURL;
+        $this->profilePicUrl = $profilePicUrl;
         return $this;
     }
 
