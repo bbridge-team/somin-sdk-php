@@ -35,7 +35,6 @@ class CrawlerFollowers extends AbstractRequest
 
     /**
      * Social network user name (supported by all crawlers)
-     * or id (supported by all crawlers except for email)
      *
      * @param $username
      * @return $this
@@ -43,6 +42,18 @@ class CrawlerFollowers extends AbstractRequest
     public function setUserName($username)
     {
         $this->data['username'] = $username;
+        return $this;
+    }
+
+    /**
+     * Social network user id
+     *
+     * @param $userId
+     * @return $this
+     */
+    public function setUserId($userId)
+    {
+        $this->data['id'] = $userId;
         return $this;
     }
 
