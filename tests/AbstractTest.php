@@ -50,11 +50,11 @@ abstract class AbstractTest extends \PHPUnit_Framework_TestCase
         $numAttempts = $this->numAttempts;
         $response = null;   /** @var $response AbstractResponse */
 
-        while($numAttempts-- > 0 && ($response == null || $response->getHttpCode() !== 200)) {
+        while($numAttempts-- > 0 && ($response == null || $response->getHttpCode() === 202)) {
             sleep(self::RESPONSE_WAIT_TIME_SECONDS);
             $response = $commonProcessor->response($request);
         }
 
-         return $response;
+        return $response;
     }
 }

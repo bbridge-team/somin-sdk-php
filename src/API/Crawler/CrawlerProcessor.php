@@ -6,7 +6,7 @@ use SoMin\API\Crawler\Requests\CrawlerContentData;
 use SoMin\API\Crawler\Requests\CrawlerFollowers;
 use SoMin\API\Crawler\Requests\CrawlerContent;
 use SoMin\API\Crawler\Requests\CrawlerFollowersData;
-use SoMin\API\Crawler\Responses\CrawlerFollowersDataResponse;
+use SoMin\API\Crawler\Requests\CrawlerTimeline;
 use SoMin\Common\APIRequester;
 use SoMin\Common\RequestIDResponse;
 
@@ -58,5 +58,17 @@ class CrawlerProcessor extends APIRequester
     public function followersDownload(CrawlerFollowersData $contentData)
     {
         return $this->post('data/followers/download', $contentData, RequestIDResponse::class);
+    }
+
+    /**
+     * Performs Crawler Timeline API request.
+     *
+     * @param CrawlerTimeline $timelineData
+     *
+     * @return RequestIDResponse
+     */
+    public function timeline(CrawlerTimeline $timelineData)
+    {
+        return $this->post('data/timeline', $timelineData, RequestIDResponse::class);
     }
 }

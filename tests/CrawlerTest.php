@@ -7,6 +7,7 @@ use SoMin\API\Crawler\Requests\CrawlerContentData;
 use SoMin\API\Crawler\Requests\CrawlerFollowers;
 use SoMin\API\Crawler\Requests\CrawlerContent;
 use SoMin\API\Crawler\Requests\CrawlerFollowersData;
+use SoMin\API\Crawler\Requests\CrawlerTimeline;
 use SoMin\API\Crawler\Requests\DataSourceEnum;
 use SoMin\API\Crawler\Responses\CrawlerContentDataResponse;
 use SoMin\API\Crawler\Responses\CrawlerContentDataIdResponse;
@@ -88,5 +89,42 @@ class CrawlerTest extends AbstractTest
         $this->assertInstanceOf(CrawlerFollowersDataResponse::class, $response);
         $this->assertEquals(200, $response->getHttpCode());
         $this->assertNotNull($response->getFollowers());
+    }
+
+    public function testCanRequestCrawlerTimelineRetrieveAndDownloadAndGetCorrectResults()
+    {
+        $this->authorize();
+
+        $crawlerProcessor = new CrawlerProcessor($this->requester);
+        $timelineRequest = (new CrawlerTimeline())
+            ->setNumToRetrieve(25)
+            ->setPageSize(5)
+            ->setDataSource(DataSourceEnum::TWITTER)
+            ->setAnyOfTheseWords(['SpaceX', 'BlueOrigin'])
+            ->setHashTags(['space', 'infinity']);
+
+        $dataIdResponse = $crawlerProcessor->timeline($timelineRequest);
+        $this->assertRequestIDResponse($dataIdResponse);
+
+        /** @var CrawlerContentDataIdResponse $response */
+        $response = $this->receiveResponse($dataIdResponse->getRequestId(), CrawlerContentDataIdResponse::class);
+        $this->assertNotNull($response);
+        $this->assertInstanceOf(CrawlerContentDataIdResponse::class, $response);
+        $this->assertEquals(200, $response->getHttpCode());
+        $this->assertNotEmpty($response->getPageIds());
+        $this->assertNotEmpty($response->getCrawledAt());
+
+        $downloadRequest = (new CrawlerContentData())
+            ->setPageId($response->getPageIds()[0]);
+
+        $dataResponse = $crawlerProcessor->contentDownload($downloadRequest);
+        $this->assertRequestIDResponse($dataResponse);
+
+        /** @var CrawlerContentDataResponse $response */
+        $response = $this->receiveResponse($dataResponse->getRequestId(), CrawlerContentDataResponse::class);
+        $this->assertNotNull($response);
+        $this->assertInstanceOf(CrawlerContentDataResponse::class, $response);
+        $this->assertEquals(200, $response->getHttpCode());
+        $this->assertNotNull($response->getUserData());
     }
 }
