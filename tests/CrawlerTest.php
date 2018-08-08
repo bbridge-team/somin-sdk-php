@@ -10,8 +10,7 @@ use SoMin\API\Crawler\Requests\CrawlerFollowersData;
 use SoMin\API\Crawler\Requests\CrawlerTimeline;
 use SoMin\API\Crawler\Requests\DataSourceEnum;
 use SoMin\API\Crawler\Responses\CrawlerContentDataResponse;
-use SoMin\API\Crawler\Responses\CrawlerContentDataIdResponse;
-use SoMin\API\Crawler\Responses\CrawlerFollowerPagesResponse;
+use SoMin\API\Crawler\Responses\CrawlerPagesResponse;
 use SoMin\API\Crawler\Responses\CrawlerFollowersDataResponse;
 
 class CrawlerTest extends AbstractTest
@@ -33,10 +32,10 @@ class CrawlerTest extends AbstractTest
         $dataIdResponse = $crawlerProcessor->user($retrieveRequest);
         $this->assertRequestIDResponse($dataIdResponse);
 
-        /** @var CrawlerContentDataIdResponse $response */
-        $response = $this->receiveResponse($dataIdResponse->getRequestId(), CrawlerContentDataIdResponse::class);
+        /** @var CrawlerPagesResponse $response */
+        $response = $this->receiveResponse($dataIdResponse->getRequestId(), CrawlerPagesResponse::class);
         $this->assertNotNull($response);
-        $this->assertInstanceOf(CrawlerContentDataIdResponse::class, $response);
+        $this->assertInstanceOf(CrawlerPagesResponse::class, $response);
         $this->assertEquals(200, $response->getHttpCode());
         $this->assertNotEmpty($response->getPageIds());
         $this->assertNotEmpty($response->getCrawledAt());
@@ -69,10 +68,10 @@ class CrawlerTest extends AbstractTest
         $dataIdResponse = $crawlerProcessor->followers($followersRequest);
         $this->assertRequestIDResponse($dataIdResponse);
 
-        /** @var CrawlerFollowerPagesResponse $response */
-        $response = $this->receiveResponse($dataIdResponse->getRequestId(), CrawlerFollowerPagesResponse::class);
+        /** @var CrawlerPagesResponse $response */
+        $response = $this->receiveResponse($dataIdResponse->getRequestId(), CrawlerPagesResponse::class);
         $this->assertNotNull($response);
-        $this->assertInstanceOf(CrawlerFollowerPagesResponse::class, $response);
+        $this->assertInstanceOf(CrawlerPagesResponse::class, $response);
         $this->assertEquals(200, $response->getHttpCode());
         $this->assertNotEmpty($response->getPageIds());
         $this->assertNotEmpty($response->getCrawledAt());
@@ -106,10 +105,10 @@ class CrawlerTest extends AbstractTest
         $dataIdResponse = $crawlerProcessor->timeline($timelineRequest);
         $this->assertRequestIDResponse($dataIdResponse);
 
-        /** @var CrawlerContentDataIdResponse $response */
-        $response = $this->receiveResponse($dataIdResponse->getRequestId(), CrawlerContentDataIdResponse::class);
+        /** @var CrawlerPagesResponse $response */
+        $response = $this->receiveResponse($dataIdResponse->getRequestId(), CrawlerPagesResponse::class);
         $this->assertNotNull($response);
-        $this->assertInstanceOf(CrawlerContentDataIdResponse::class, $response);
+        $this->assertInstanceOf(CrawlerPagesResponse::class, $response);
         $this->assertEquals(200, $response->getHttpCode());
         $this->assertNotEmpty($response->getPageIds());
         $this->assertNotEmpty($response->getCrawledAt());

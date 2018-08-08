@@ -4,7 +4,7 @@ namespace SoMin\API\Crawler\Responses;
 
 use SoMin\Common\AbstractResponse;
 
-class CrawlerFollowerPagesResponse extends AbstractResponse
+class CrawlerPagesResponse extends AbstractResponse
 {
     /** @var string[] */
     private $pageIds;
@@ -28,7 +28,7 @@ class CrawlerFollowerPagesResponse extends AbstractResponse
     }
 
     /**
-     * Data identifier.
+     * Page identifiers.
      *
      * @return string[]
      */
