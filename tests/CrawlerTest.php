@@ -100,7 +100,9 @@ class CrawlerTest extends AbstractTest
             ->setPageSize(5)
             ->setDataSource(DataSourceEnum::TWITTER)
             ->setAnyOfTheseWords(['SpaceX', 'BlueOrigin'])
-            ->setHashTags(['space', 'infinity']);
+            ->setHashTags(['space', 'infinity'])
+            ->setNearThisPlace('Washington DC')
+            ->setWithin(50);
 
         $dataIdResponse = $crawlerProcessor->timeline($timelineRequest);
         $this->assertRequestIDResponse($dataIdResponse);

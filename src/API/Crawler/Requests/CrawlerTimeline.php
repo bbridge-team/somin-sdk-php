@@ -137,6 +137,16 @@ class CrawlerTimeline extends AbstractRequest
     }
 
     /**
+     * @param int $within
+     * @return $this
+     */
+    public function setWithin($within)
+    {
+        $this->data['query']['within'] = $within;
+        return $this;
+    }
+
+    /**
      * @param int $fromDate
      * @return $this
      */
