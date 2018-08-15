@@ -92,7 +92,7 @@ class CrawlerTest extends AbstractTest
         $this->assertNotNull($response->getFollowers());
     }
 
-    public function testCanRequestCrawlerTimelineRetrieveAndDownloadAndGetCorrectResults()
+    public function testCanRequestCrawlerTimelineSearchAndDownloadCorrectResults()
     {
         $this->authorize();
 
