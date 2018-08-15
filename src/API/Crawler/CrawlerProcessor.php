@@ -2,11 +2,12 @@
 
 namespace SoMin\API\Crawler;
 
-use SoMin\API\Crawler\Requests\CrawlerContentData;
+use SoMin\API\Crawler\Requests\CrawlerUserData;
 use SoMin\API\Crawler\Requests\CrawlerFollowers;
-use SoMin\API\Crawler\Requests\CrawlerContent;
+use SoMin\API\Crawler\Requests\CrawlerUser;
 use SoMin\API\Crawler\Requests\CrawlerFollowersData;
-use SoMin\API\Crawler\Requests\CrawlerTimeline;
+use SoMin\API\Crawler\Requests\CrawlerSearch;
+use SoMin\API\Crawler\Requests\InstagramVenueId;
 use SoMin\Common\APIRequester;
 use SoMin\Common\RequestIDResponse;
 
@@ -15,11 +16,11 @@ class CrawlerProcessor extends APIRequester
     /**
      * Performs Crawler Content API request.
      *
-     * @param CrawlerContent $content Retrieval data object.
+     * @param CrawlerUser $content Retrieval data object.
      *
      * @return RequestIDResponse
      */
-    public function user(CrawlerContent $content)
+    public function user(CrawlerUser $content)
     {
         return $this->post('data/user', $content, RequestIDResponse::class);
     }
@@ -27,11 +28,11 @@ class CrawlerProcessor extends APIRequester
     /**
      * Performs Crawler Content Downloading API request.
      *
-     * @param CrawlerContentData $contentData Download data object.
+     * @param CrawlerUserData $contentData Download data object.
      *
      * @return RequestIDResponse
      */
-    public function contentDownload(CrawlerContentData $contentData)
+    public function contentDownload(CrawlerUserData $contentData)
     {
         return $this->post('data/content/download', $contentData, RequestIDResponse::class);
     }
@@ -63,12 +64,24 @@ class CrawlerProcessor extends APIRequester
     /**
      * Performs Crawler Timeline API request.
      *
-     * @param CrawlerTimeline $timelineData
+     * @param CrawlerSearch $searchData
      *
      * @return RequestIDResponse
      */
-    public function timeline(CrawlerTimeline $timelineData)
+    public function search(CrawlerSearch $searchData)
     {
-        return $this->post('data/timeline', $timelineData, RequestIDResponse::class);
+        return $this->post('data/search', $searchData, RequestIDResponse::class);
+    }
+
+    /**
+     * Performs Crawler Instagram Venue API request.
+     *
+     * @param InstagramVenueId $instagramVenueId
+     *
+     * @return RequestIDResponse
+     */
+    public function instagramVenue(InstagramVenueId $instagramVenueId)
+    {
+        return $this->post('data/instagram/venue', $instagramVenueId, RequestIDResponse::class);
     }
 }

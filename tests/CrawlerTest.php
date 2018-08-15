@@ -3,15 +3,17 @@
 namespace SoMin\Test;
 
 use SoMin\API\Crawler\CrawlerProcessor;
-use SoMin\API\Crawler\Requests\CrawlerContentData;
+use SoMin\API\Crawler\Requests\CrawlerUserData;
 use SoMin\API\Crawler\Requests\CrawlerFollowers;
-use SoMin\API\Crawler\Requests\CrawlerContent;
+use SoMin\API\Crawler\Requests\CrawlerUser;
 use SoMin\API\Crawler\Requests\CrawlerFollowersData;
-use SoMin\API\Crawler\Requests\CrawlerTimeline;
+use SoMin\API\Crawler\Requests\CrawlerSearch;
 use SoMin\API\Crawler\Requests\DataSourceEnum;
+use SoMin\API\Crawler\Requests\InstagramVenueId;
 use SoMin\API\Crawler\Responses\CrawlerContentDataResponse;
 use SoMin\API\Crawler\Responses\CrawlerPagesResponse;
 use SoMin\API\Crawler\Responses\CrawlerFollowersDataResponse;
+use SoMin\API\Crawler\Responses\InstagramVenueResponse;
 
 class CrawlerTest extends AbstractTest
 {
@@ -20,7 +22,7 @@ class CrawlerTest extends AbstractTest
         $this->authorize();
 
         $crawlerProcessor = new CrawlerProcessor($this->requester);
-        $retrieveRequest = (new CrawlerContent())
+        $retrieveRequest = (new CrawlerUser())
             ->setDataSource(DataSourceEnum::TWITTER)
             ->setPageSize(20)
             ->setNumToRetrieve(100)
@@ -40,7 +42,7 @@ class CrawlerTest extends AbstractTest
         $this->assertNotEmpty($response->getPageIds());
         $this->assertNotEmpty($response->getCrawledAt());
 
-        $downloadRequest = (new CrawlerContentData())
+        $downloadRequest = (new CrawlerUserData())
             ->setPageId($response->getPageIds()[0]);
 
         $dataResponse = $crawlerProcessor->contentDownload($downloadRequest);
@@ -95,16 +97,16 @@ class CrawlerTest extends AbstractTest
         $this->authorize();
 
         $crawlerProcessor = new CrawlerProcessor($this->requester);
-        $timelineRequest = (new CrawlerTimeline())
+        $timelineRequest = (new CrawlerSearch())
             ->setNumToRetrieve(25)
             ->setPageSize(5)
             ->setDataSource(DataSourceEnum::TWITTER)
             ->setAnyOfTheseWords(['SpaceX', 'BlueOrigin'])
             ->setHashTags(['space', 'infinity'])
-            ->setNearThisPlace('Washington DC')
+            ->setLocation('Washington DC')
             ->setWithin(50);
 
-        $dataIdResponse = $crawlerProcessor->timeline($timelineRequest);
+        $dataIdResponse = $crawlerProcessor->search($timelineRequest);
         $this->assertRequestIDResponse($dataIdResponse);
 
         /** @var CrawlerPagesResponse $response */
@@ -115,7 +117,7 @@ class CrawlerTest extends AbstractTest
         $this->assertNotEmpty($response->getPageIds());
         $this->assertNotEmpty($response->getCrawledAt());
 
-        $downloadRequest = (new CrawlerContentData())
+        $downloadRequest = (new CrawlerUserData())
             ->setPageId($response->getPageIds()[0]);
 
         $dataResponse = $crawlerProcessor->contentDownload($downloadRequest);
@@ -127,5 +129,29 @@ class CrawlerTest extends AbstractTest
         $this->assertInstanceOf(CrawlerContentDataResponse::class, $response);
         $this->assertEquals(200, $response->getHttpCode());
         $this->assertNotNull($response->getUserData());
+    }
+
+    public function testCanRequestInstagramVenueAndDownloadCorrectResult()
+    {
+        $this->authorize();
+
+        $venueId = 1810148059025199;
+
+        $crawlerProcessor = new CrawlerProcessor($this->requester);
+        $instagramVenueRequest = (new InstagramVenueId())
+            ->setVenueId($venueId);
+
+        $dataIdResponse = $crawlerProcessor->instagramVenue($instagramVenueRequest);
+        $this->assertRequestIDResponse($dataIdResponse);
+
+        /** @var InstagramVenueResponse $response */
+        $response = $this->receiveResponse($dataIdResponse->getRequestId(), InstagramVenueResponse::class);
+        $this->assertNotNull($response);
+        $this->assertInstanceOf(InstagramVenueResponse::class, $response);
+        $this->assertEquals(200, $response->getHttpCode());
+        $this->assertEquals($venueId, $response->getVenueId());
+        $this->assertNotEmpty($response->getName());
+        $this->assertNotEmpty($response->getLat());
+        $this->assertNotEmpty($response->getLng());
     }
 }

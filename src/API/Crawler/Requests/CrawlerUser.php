@@ -7,7 +7,7 @@ use SoMin\Common\AbstractRequest;
 /**
  * Structure to be send in Crawler Retrieval request.
  */
-class CrawlerContent extends AbstractRequest
+class CrawlerUser extends AbstractRequest
 {
     /**
      * CrawlerRetrievalData constructor.

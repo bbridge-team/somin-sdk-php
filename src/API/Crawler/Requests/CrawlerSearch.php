@@ -4,7 +4,7 @@ namespace SoMin\API\Crawler\Requests;
 
 use SoMin\Common\AbstractRequest;
 
-class CrawlerTimeline extends AbstractRequest
+class CrawlerSearch extends AbstractRequest
 {
     /**
      * Count of retrieval data.
@@ -127,12 +127,12 @@ class CrawlerTimeline extends AbstractRequest
     }
 
     /**
-     * @param string $place
+     * @param string $location
      * @return $this
      */
-    public function setNearThisPlace($place)
+    public function setLocation($location)
     {
-        $this->data['query']['near_this_place'] = $place;
+        $this->data['query']['location'] = $location;
         return $this;
     }
 
