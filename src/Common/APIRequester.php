@@ -9,7 +9,7 @@ use SoMin\Common\Interfaces\HttpRequesterInterface;
 abstract class APIRequester
 {
     const API_VERSION   = '1';
-    const API_HOST      = 'http://somin.online:1030';
+    const API_HOST      = 'http://api.somin.ai:1030';
 
     private $requester = null;
     private $host = null;
