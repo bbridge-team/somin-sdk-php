@@ -2,6 +2,7 @@
 
 namespace SoMin\Entities;
 
+use SoMin\API\Crawler\Requests\DataSourceEnum;
 use SoMin\Utils;
 
 class Post
@@ -51,7 +52,11 @@ class Post
         $this->text = Utils::getWithUnset($data, 'text');
         $this->imageUrl = Utils::getWithUnset($data, 'imageUrl');
         if (isset($data['createdAt'])) {
-            $this->createdAt = new \DateTime('@'.Utils::getWithUnset($data, 'createdAt'));
+            $unixTime = Utils::getWithUnset($data, 'createdAt');
+            if ($this->source === DataSourceEnum::INSTAGRAM) {
+                $unixTime = ceil($unixTime / 1000);
+            }
+            $this->createdAt = new \DateTime('@'.$unixTime);
         }
 
         $this->timeZoneOffset = Utils::getWithUnset($data, 'timeZoneOffset');
