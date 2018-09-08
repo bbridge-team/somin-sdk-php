@@ -53,10 +53,12 @@ class Post
         $this->imageUrl = Utils::getWithUnset($data, 'imageUrl');
         if (isset($data['createdAt'])) {
             $unixTime = Utils::getWithUnset($data, 'createdAt');
-            if ($this->source === DataSourceEnum::INSTAGRAM) {
-                $unixTime = ceil($unixTime / 1000);
-            }
+
             $this->createdAt = new \DateTime('@'.$unixTime);
+            if ($this->createdAt->format('Y') == 1970) {
+                $unixTime = ceil($unixTime / 1000);
+                $this->createdAt = new \DateTime('@'.$unixTime);
+            }
         }
 
         $this->timeZoneOffset = Utils::getWithUnset($data, 'timeZoneOffset');
