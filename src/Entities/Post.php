@@ -30,6 +30,8 @@ class Post
     private $likes;
     /** @var int */
     private $reposts;
+    /** @var int */
+    private $numComments;
 
     /** @var Location */
     private $location;
@@ -63,13 +65,16 @@ class Post
 
         $this->timeZoneOffset = Utils::getWithUnset($data, 'timeZoneOffset');
 
-        $this->likes = Utils::getWithUnset($data, 'likes');
-        $this->reposts = Utils::getWithUnset($data, 'reposts');
+        $this->likes = (int) Utils::getWithUnset($data, 'likes');
+        $this->reposts = (int) Utils::getWithUnset($data, 'reposts');
 
         $properties = Utils::get($data, 'properties', []);
 
         if (isset($properties['location'])) {
             $this->location = new Location(Utils::getWithUnset($properties, 'location'));
+        }
+        if (isset($properties['numComments'])) {
+            $this->numComments = (int) Utils::getWithUnset($properties, 'numComments');
         }
 
         $this->properties = $properties;
@@ -153,6 +158,14 @@ class Post
     public function getReposts()
     {
         return $this->reposts;
+    }
+
+    /**
+     * @return int
+     */
+    public function getNumComments()
+    {
+        return $this->numComments;
     }
 
     /**
